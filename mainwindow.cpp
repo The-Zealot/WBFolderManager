@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     s = nullptr;
     fileSize = 0;
 
-    ui->editName->setValidator(new QRegularExpressionValidator(QRegularExpression("[a-zA-Z0-9а-яА-Я]{0,50}")));
+    ui->editName->setValidator(new QRegularExpressionValidator(QRegularExpression("[ a-zA-Z0-9а-яА-Я]{0,50}")));
 
     QFile config("config.json");
     if (config.open(QIODevice::ReadOnly))
