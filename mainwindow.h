@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "settingsform.h"
+#include "MkdirPolicy.h"
 
 #include <QMainWindow>
 #include <QJsonDocument>
@@ -38,6 +39,7 @@ private:
     QString discDir;
     QString overDir;
     QStringList photos;
+    MkdirPolicy policy;
 
     int fileSize;
 };

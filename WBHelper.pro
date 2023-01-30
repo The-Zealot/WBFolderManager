@@ -15,6 +15,7 @@ SOURCES += \
 
 HEADERS += \
     mainwindow.h \
+    mkdirPolicy.h \
     settingsform.h
 
 FORMS += \

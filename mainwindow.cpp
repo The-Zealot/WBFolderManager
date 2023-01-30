@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     s = nullptr;
     fileSize = 0;
 
-    ui->editName->setValidator(new QRegularExpressionValidator(QRegularExpression("[ a-zA-Z0-9а-яА-Я]{0,50}")));
+    ui->editName->setValidator(new QRegularExpressionValidator(QRegularExpression("[a-zA-Z0-9а-яА-Я][a-zA-Z0-9а-яА-Я ]{0,50}")));
 
     QFile config("config.json");
     if (config.open(QIODevice::ReadOnly))
@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
         defectDir = jObject["defectDir"].toString();
         discDir = jObject["discrepancyDir"].toString();
         overDir = jObject["overageDir"].toString();
+        policy = (MkdirPolicy)jObject["mkdirPolicy"].toInteger();
         config.close();
     }
     else
@@ -135,13 +136,36 @@ void MainWindow::on_buttonSubmit_clicked()
     if (ui->radioButtonOverage->isChecked())
         filePath = overDir;
 
+    QDir dir(filePath + "/" + dirPrefix + " " + ui->editName->text());
+
+
+    switch(policy)
+    {
+    case MkdirPolicy::Ignore:
+        break;
+
+    case MkdirPolicy::Ask:
+        if (dir.exists())
+            if (QMessageBox::warning(this, "Внимание!", "Данная директория уже существует. Хотите продолжить?",
+                                     QMessageBox::Yes, QMessageBox::No) == QMessageBox::No)
+                return;
+        break;
+
+    case MkdirPolicy::Block:
+        if (dir.exists())
+        {
+            QMessageBox::critical(this, "Внимание!", "Данная директория уже существует!");
+            return;
+        }
+        break;
+    }
+
     for (auto & iter : photos)
     {
         QFile file(iter);
         if (file.open(QIODevice::ReadOnly))
         {
             QFileInfo finfo(iter);
-            QDir dir(filePath + "/" + dirPrefix + " " + ui->editName->text());
             if (!dir.exists())
             {
                 dir.mkdir(dir.path());

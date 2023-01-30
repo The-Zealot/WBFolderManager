@@ -1,6 +1,8 @@
 #ifndef SETTINGSFORM_H
 #define SETTINGSFORM_H
 
+#include "mkdirPolicy.h"
+
 #include <QDialog>
 #include <QMessageBox>
 #include <QJsonDocument>

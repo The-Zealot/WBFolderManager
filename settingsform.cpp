@@ -20,12 +20,37 @@ SettingsForm::SettingsForm(QWidget *parent) :
     ui->editDiscrepancyDirection->setText(jObject["discrepancyDir"].toString());
     ui->editOverageDirection->setText(jObject["overageDir"].toString());
 
+    switch (jObject["mkdirPolicy"].toInteger())
+    {
+    case MkdirPolicy::Ignore:
+        ui->radioButtonIgnore->setChecked(true);
+        break;
+    case MkdirPolicy::Ask:
+        ui->radioButtonAsk->setChecked(true);
+        break;
+    case MkdirPolicy::Block:
+        ui->radioButtonBlock->setChecked(true);
+        break;
+    }
+
     connect(ui->buttonSave, &QPushButton::clicked, [this](){
+
+        MkdirPolicy policy;
+        if (ui->radioButtonIgnore->isChecked())
+            policy = MkdirPolicy::Ignore;
+        else if (ui->radioButtonAsk->isChecked())
+            policy = MkdirPolicy::Ask;
+        else if (ui->radioButtonBlock->isChecked())
+            policy = MkdirPolicy::Block;
+        else
+            policy = MkdirPolicy::Ignore;
+
         QJsonObject jObject;
         jObject["startDir"]         = ui->editStartDirection->text();
         jObject["defectDir"]        = ui->editDefectDirection->text();
         jObject["discrepancyDir"]   = ui->editDiscrepancyDirection->text();
         jObject["overageDir"]       = ui->editOverageDirection->text();
+        jObject["mkdirPolicy"]      = policy;
 
         QJsonDocument json(jObject);
         QFile file("config.json");
