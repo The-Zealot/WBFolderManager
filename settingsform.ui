@@ -146,9 +146,6 @@
         <property name="text">
          <string>Тип директории</string>
         </property>
-        <property name="checkable">
-         <bool>false</bool>
-        </property>
         <property name="checked">
          <bool>false</bool>
         </property>
@@ -159,18 +156,12 @@
         <property name="text">
          <string>Дата</string>
         </property>
-        <property name="checkable">
-         <bool>false</bool>
-        </property>
        </widget>
       </item>
       <item>
        <widget class="QRadioButton" name="radioButton_3">
         <property name="text">
          <string>Нет</string>
-        </property>
-        <property name="checkable">
-         <bool>false</bool>
         </property>
        </widget>
       </item>

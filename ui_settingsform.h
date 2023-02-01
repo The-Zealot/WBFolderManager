@@ -162,20 +162,17 @@ public:
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         radioButton = new QRadioButton(groupBox_2);
         radioButton->setObjectName(QString::fromUtf8("radioButton"));
-        radioButton->setCheckable(false);
         radioButton->setChecked(false);
 
         verticalLayout_2->addWidget(radioButton);
 
         radioButton_2 = new QRadioButton(groupBox_2);
         radioButton_2->setObjectName(QString::fromUtf8("radioButton_2"));
-        radioButton_2->setCheckable(false);
 
         verticalLayout_2->addWidget(radioButton_2);
 
         radioButton_3 = new QRadioButton(groupBox_2);
         radioButton_3->setObjectName(QString::fromUtf8("radioButton_3"));
-        radioButton_3->setCheckable(false);
 
         verticalLayout_2->addWidget(radioButton_3);
 
