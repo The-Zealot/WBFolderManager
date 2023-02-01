@@ -11,6 +11,9 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QClipboard>
+#include <QDragEnterEvent>
+#include <QList>
+#include <QMimeData>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,6 +28,10 @@ public:
     ~MainWindow();
 
     void updateDataOut();
+    void fillListWidget();
+
+protected:
+    bool eventFilter(QObject* object, QEvent* event);
 
 private slots:
     void on_buttonBrowse_clicked();

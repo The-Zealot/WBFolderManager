@@ -38,6 +38,12 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->radioButtonOverage, &QRadioButton::clicked, [this](){ updateDataOut(); });
     connect(ui->editName, &QLineEdit::textEdited, [this](){ updateDataOut(); });
 
+    connect(ui->listWidget, &QListWidget::itemDoubleClicked, [this](){
+        photos.removeAt(ui->listWidget->currentRow());
+        fillListWidget();
+        updateDataOut();
+
+    });
     connect(buttonSettings, &QPushButton::clicked, [this](){
         if (s)
         {
@@ -47,6 +53,11 @@ MainWindow::MainWindow(QWidget *parent)
         SettingsForm* s = new SettingsForm(this);
         s->show();
     });
+
+    ui->editPhotoPath->installEventFilter(this);
+    ui->editPhotoPath->setAcceptDrops(true);
+
+    qDebug() << "Data out updated";
 
     updateDataOut();
 }
@@ -79,13 +90,8 @@ void MainWindow::updateDataOut()
     ui->labelDataOut->setText(data);
 }
 
-
-void MainWindow::on_buttonBrowse_clicked()
+void MainWindow::fillListWidget()
 {
-    photos = QFileDialog::getOpenFileNames(this, "Выбор фотокарточек", startDir, "*.png; *.jpg; *.jpeg");
-
-    qDebug() << photos;
-
     fileSize = 0;
 
     ui->listWidget->clear();
@@ -100,16 +106,49 @@ void MainWindow::on_buttonBrowse_clicked()
 
     if (fileSize > (1024))
         fileSize /= (1024);
+}
+
+bool MainWindow::eventFilter(QObject *object, QEvent *event)
+{
+    if (event->type() == QEvent::DragEnter)
+    {
+        QDragEnterEvent* dee = dynamic_cast<QDragEnterEvent*>(event);
+        dee->acceptProposedAction();
+        return true;
+    }
+    if (event->type() == QEvent::Drop)
+    {
+        QDropEvent* de = dynamic_cast<QDropEvent*>(event);
+        QList<QUrl> files = de->mimeData()->urls();
+
+        for (auto iter : files)
+        {
+            photos.append(iter.toLocalFile());
+        }
+
+        if (files.isEmpty())
+            return true;
+
+        fillListWidget();
+
+        updateDataOut();
+
+        return true;
+    }
+
+    return QMainWindow::eventFilter(object, event);
+}
+
+
+void MainWindow::on_buttonBrowse_clicked()
+{
+    photos = QFileDialog::getOpenFileNames(this, "Выбор фотокарточек", startDir, "*.png; *.jpg; *.jpeg");
+
+    qDebug() << photos;
+
+    fillListWidget();
 
     updateDataOut();
-
-    /*for (int i = 0; i < photos.size(); i++)
-    {
-        QLabel* photo = new QLabel(ui->scrollAreaWidgetContents);
-        photo->setPixmap(photos.at(i));
-        photo->setGeometry(photo->pixmap().rect());
-        photo->show();
-    }*/
 }
 
 

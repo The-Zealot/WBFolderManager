@@ -8,4 +8,11 @@ enum MkdirPolicy
     Block = 2
 };
 
+enum PrefixType
+{
+    None = 0,
+    DirName = 1,
+    Date = 3
+};
+
 #endif // MKDIRPOLICY_H

@@ -29,7 +29,11 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QLineEdit" name="editPhotoPath"/>
+           <widget class="QLineEdit" name="editPhotoPath">
+            <property name="placeholderText">
+             <string>Перетащите сюда фотокарточки</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QToolButton" name="buttonBrowse">
@@ -126,6 +130,9 @@
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
