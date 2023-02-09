@@ -9,6 +9,9 @@ SettingsForm::SettingsForm(QWidget *parent) :
 
     this->setModal(true);
 
+    ui->checkBox->setEnabled(false);
+    ui->checkBox_2->setEnabled(false);
+
     QFile file("config.json");
     file.open(QIODevice::ReadOnly);
     QJsonObject jObject;

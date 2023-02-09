@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
@@ -47,9 +48,8 @@ public:
     QPushButton *buttonSave;
     QGroupBox *groupBox_2;
     QVBoxLayout *verticalLayout_2;
-    QRadioButton *radioButton;
-    QRadioButton *radioButton_2;
-    QRadioButton *radioButton_3;
+    QCheckBox *checkBox;
+    QCheckBox *checkBox_2;
 
     void setupUi(QDialog *SettingsForm)
     {
@@ -160,21 +160,17 @@ public:
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         verticalLayout_2 = new QVBoxLayout(groupBox_2);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        radioButton = new QRadioButton(groupBox_2);
-        radioButton->setObjectName(QString::fromUtf8("radioButton"));
-        radioButton->setChecked(false);
+        checkBox = new QCheckBox(groupBox_2);
+        checkBox->setObjectName(QString::fromUtf8("checkBox"));
+        checkBox->setCheckable(true);
+        checkBox->setChecked(true);
 
-        verticalLayout_2->addWidget(radioButton);
+        verticalLayout_2->addWidget(checkBox);
 
-        radioButton_2 = new QRadioButton(groupBox_2);
-        radioButton_2->setObjectName(QString::fromUtf8("radioButton_2"));
+        checkBox_2 = new QCheckBox(groupBox_2);
+        checkBox_2->setObjectName(QString::fromUtf8("checkBox_2"));
 
-        verticalLayout_2->addWidget(radioButton_2);
-
-        radioButton_3 = new QRadioButton(groupBox_2);
-        radioButton_3->setObjectName(QString::fromUtf8("radioButton_3"));
-
-        verticalLayout_2->addWidget(radioButton_3);
+        verticalLayout_2->addWidget(checkBox_2);
 
 
         gridLayout->addWidget(groupBox_2, 5, 2, 4, 1);
@@ -201,10 +197,9 @@ public:
         buttonDisc->setText(QCoreApplication::translate("SettingsForm", "...", nullptr));
         buttonOver->setText(QCoreApplication::translate("SettingsForm", "...", nullptr));
         buttonSave->setText(QCoreApplication::translate("SettingsForm", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", nullptr));
-        groupBox_2->setTitle(QCoreApplication::translate("SettingsForm", "\320\242\320\270\320\277 \320\277\321\200\320\265\321\204\320\270\320\272\321\201\320\260", nullptr));
-        radioButton->setText(QCoreApplication::translate("SettingsForm", "\320\242\320\270\320\277 \320\264\320\270\321\200\320\265\320\272\321\202\320\276\321\200\320\270\320\270", nullptr));
-        radioButton_2->setText(QCoreApplication::translate("SettingsForm", "\320\224\320\260\321\202\320\260", nullptr));
-        radioButton_3->setText(QCoreApplication::translate("SettingsForm", "\320\235\320\265\321\202", nullptr));
+        groupBox_2->setTitle(QCoreApplication::translate("SettingsForm", "\320\222\320\272\320\273\321\216\321\207\320\265\320\275\320\270\321\217 \320\275\320\260\320\267\320\262\320\260\320\275\320\270\320\271", nullptr));
+        checkBox->setText(QCoreApplication::translate("SettingsForm", "\320\242\320\270\320\277 \320\264\320\270\321\200\320\265\320\272\321\202\320\276\321\200\320\270\320\270", nullptr));
+        checkBox_2->setText(QCoreApplication::translate("SettingsForm", "\320\224\320\260\321\202\320\260", nullptr));
     } // retranslateUi
 
 };

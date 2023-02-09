@@ -138,30 +138,26 @@
    <item row="5" column="2" rowspan="4">
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
-      <string>Тип префикса</string>
+      <string>Включения названий</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QRadioButton" name="radioButton">
+       <widget class="QCheckBox" name="checkBox">
         <property name="text">
          <string>Тип директории</string>
         </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
         <property name="checked">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="radioButton_2">
+       <widget class="QCheckBox" name="checkBox_2">
         <property name="text">
          <string>Дата</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton_3">
-        <property name="text">
-         <string>Нет</string>
         </property>
        </widget>
       </item>
