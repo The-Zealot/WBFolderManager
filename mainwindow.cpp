@@ -56,8 +56,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->editPhotoPath->installEventFilter(this);
     ui->editPhotoPath->setAcceptDrops(true);
-
-    qDebug() << "Data out updated";
+    ui->editPhotoPath->setReadOnly(true);
 
     updateDataOut();
 }
@@ -70,6 +69,25 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateDataOut()
 {
+    QString postfixFileSize = " B";
+
+    if (fileSize >= (1024 * 1024))
+    {
+        fileSize /= (1024 * 1024);
+        postfixFileSize = " MB";
+    }
+    if (fileSize >= 1024)
+    {
+        fileSize /= 1024;
+        postfixFileSize = " KB";
+    }
+
+    int temp = fileSize * 100;
+    fileSize = temp;
+    fileSize /= 100;
+
+    qDebug() << temp << fileSize;
+
     QString data = "Загруженные фотографии:\n";
 
     for (auto & iter : photos)
@@ -77,7 +95,7 @@ void MainWindow::updateDataOut()
 
     data.append("Количество загруженных фотографий: " + QVariant(photos.size()).toString() + '\n');
 
-    data.append("Размер загруженных фото: " + QVariant(fileSize).toString() + " KB\n");
+    data.append("Размер загруженных фото: " + QVariant(fileSize).toString() + postfixFileSize + '\n');
 
     data.append("Имя новой директории: " + ui->editName->text() + '\n');
 
@@ -88,6 +106,8 @@ void MainWindow::updateDataOut()
             data.append(iter->text());
 
     ui->labelDataOut->setText(data);
+
+    qDebug() << "updateDataOut() was called";
 }
 
 void MainWindow::fillListWidget()
@@ -104,8 +124,8 @@ void MainWindow::fillListWidget()
         fileSize += info.size();
     }
 
-    if (fileSize > (1024))
-        fileSize /= (1024);
+//    if (fileSize > (1024))
+//        fileSize /= (1024);
 }
 
 bool MainWindow::eventFilter(QObject *object, QEvent *event)

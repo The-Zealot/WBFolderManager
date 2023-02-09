@@ -48,6 +48,6 @@ private:
     QStringList photos;
     MkdirPolicy policy;
 
-    int fileSize;
+    double fileSize;
 };
 #endif // MAINWINDOW_H
