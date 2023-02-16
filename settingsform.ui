@@ -138,13 +138,13 @@
    <item row="5" column="2" rowspan="4">
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
-      <string>Включения названий</string>
+      <string>Дополнительные параметры</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QCheckBox" name="checkBox">
+       <widget class="QCheckBox" name="checkBoxCopyMovePhoto">
         <property name="text">
-         <string>Тип директории</string>
+         <string>Копировать фотокарточки</string>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -157,7 +157,14 @@
       <item>
        <widget class="QCheckBox" name="checkBox_2">
         <property name="text">
-         <string>Дата</string>
+         <string>Автозапуск</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkBox_3">
+        <property name="text">
+         <string>Проверка обновлений</string>
         </property>
        </widget>
       </item>

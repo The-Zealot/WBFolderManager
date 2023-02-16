@@ -47,6 +47,7 @@ private:
     QString overDir;
     QStringList photos;
     MkdirPolicy policy;
+    bool copyMovePhoto;
 
     double fileSize;
 };

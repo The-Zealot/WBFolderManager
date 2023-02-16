@@ -1,4 +1,5 @@
 {
+    "copyMovePhoto": true,
     "defectDir": "D:/wildberries/брак",
     "discrepancyDir": "D:/wildberries/несоответствия",
     "mkdirPolicy": 1,

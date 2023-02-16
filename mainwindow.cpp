@@ -7,8 +7,27 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    int BUTTON_SIZE = 16;
     QPushButton* buttonSettings = new QPushButton(this);
-    buttonSettings->setGeometry(this->width() - 16, 0, 16, 16);
+    buttonSettings->setGeometry(this->width() - BUTTON_SIZE, 0, BUTTON_SIZE, BUTTON_SIZE);
+    buttonSettings->show();
+
+//    QPushButton* buttonUpdateStyle = new QPushButton(this);
+//    buttonUpdateStyle->setGeometry(this->width() - BUTTON_SIZE * 2, 0, BUTTON_SIZE, BUTTON_SIZE);
+
+//    buttonUpdateStyle->show();
+
+//    connect(buttonUpdateStyle, &QPushButton::clicked, [this](){
+//        QFile file("./wb_style.css");
+//        if (!file.open(QIODevice::ReadOnly))
+//        {
+//            qDebug() << "Style not load";
+//            return;
+//        }
+//        qDebug() << "Style loading...";
+//        this->setStyleSheet(file.readAll());
+//        file.close();
+//    });
 
     this->setFixedSize(this->size());
 
@@ -21,11 +40,12 @@ MainWindow::MainWindow(QWidget *parent)
     if (config.open(QIODevice::ReadOnly))
     {
         QJsonObject jObject = QJsonDocument::fromJson(config.readAll()).object();
-        startDir = jObject["startDir"].toString();
-        defectDir = jObject["defectDir"].toString();
-        discDir = jObject["discrepancyDir"].toString();
-        overDir = jObject["overageDir"].toString();
-        policy = (MkdirPolicy)jObject["mkdirPolicy"].toInteger();
+        startDir        = jObject["startDir"].toString();
+        defectDir       = jObject["defectDir"].toString();
+        discDir         = jObject["discrepancyDir"].toString();
+        overDir         = jObject["overageDir"].toString();
+        policy          = (MkdirPolicy)jObject["mkdirPolicy"].toInteger();
+        copyMovePhoto   = jObject["copyMovePhoto"].toBool();
         config.close();
     }
     else
@@ -229,7 +249,17 @@ void MainWindow::on_buttonSubmit_clicked()
             {
                 dir.mkdir(dir.path());
             }
-            file.copy(dir.path() + "/" + finfo.fileName());
+
+            QString fileName = dir.path() + "/" + finfo.fileName();
+            if (copyMovePhoto)
+            {
+                file.copy(fileName);
+            }
+            else
+            {
+                file.rename(fileName);
+            }
+
             file.close();
             QApplication::clipboard()->setText(dir.path());
         }

@@ -48,8 +48,9 @@ public:
     QPushButton *buttonSave;
     QGroupBox *groupBox_2;
     QVBoxLayout *verticalLayout_2;
-    QCheckBox *checkBox;
+    QCheckBox *checkBoxCopyMovePhoto;
     QCheckBox *checkBox_2;
+    QCheckBox *checkBox_3;
 
     void setupUi(QDialog *SettingsForm)
     {
@@ -160,17 +161,22 @@ public:
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         verticalLayout_2 = new QVBoxLayout(groupBox_2);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        checkBox = new QCheckBox(groupBox_2);
-        checkBox->setObjectName(QString::fromUtf8("checkBox"));
-        checkBox->setCheckable(true);
-        checkBox->setChecked(true);
+        checkBoxCopyMovePhoto = new QCheckBox(groupBox_2);
+        checkBoxCopyMovePhoto->setObjectName(QString::fromUtf8("checkBoxCopyMovePhoto"));
+        checkBoxCopyMovePhoto->setCheckable(true);
+        checkBoxCopyMovePhoto->setChecked(true);
 
-        verticalLayout_2->addWidget(checkBox);
+        verticalLayout_2->addWidget(checkBoxCopyMovePhoto);
 
         checkBox_2 = new QCheckBox(groupBox_2);
         checkBox_2->setObjectName(QString::fromUtf8("checkBox_2"));
 
         verticalLayout_2->addWidget(checkBox_2);
+
+        checkBox_3 = new QCheckBox(groupBox_2);
+        checkBox_3->setObjectName(QString::fromUtf8("checkBox_3"));
+
+        verticalLayout_2->addWidget(checkBox_3);
 
 
         gridLayout->addWidget(groupBox_2, 5, 2, 4, 1);
@@ -197,9 +203,10 @@ public:
         buttonDisc->setText(QCoreApplication::translate("SettingsForm", "...", nullptr));
         buttonOver->setText(QCoreApplication::translate("SettingsForm", "...", nullptr));
         buttonSave->setText(QCoreApplication::translate("SettingsForm", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", nullptr));
-        groupBox_2->setTitle(QCoreApplication::translate("SettingsForm", "\320\222\320\272\320\273\321\216\321\207\320\265\320\275\320\270\321\217 \320\275\320\260\320\267\320\262\320\260\320\275\320\270\320\271", nullptr));
-        checkBox->setText(QCoreApplication::translate("SettingsForm", "\320\242\320\270\320\277 \320\264\320\270\321\200\320\265\320\272\321\202\320\276\321\200\320\270\320\270", nullptr));
-        checkBox_2->setText(QCoreApplication::translate("SettingsForm", "\320\224\320\260\321\202\320\260", nullptr));
+        groupBox_2->setTitle(QCoreApplication::translate("SettingsForm", "\320\224\320\276\320\277\320\276\320\273\320\275\320\270\321\202\320\265\320\273\321\214\320\275\321\213\320\265 \320\277\320\260\321\200\320\260\320\274\320\265\321\202\321\200\321\213", nullptr));
+        checkBoxCopyMovePhoto->setText(QCoreApplication::translate("SettingsForm", "\320\232\320\276\320\277\320\270\321\200\320\276\320\262\320\260\321\202\321\214 \321\204\320\276\321\202\320\276\320\272\320\260\321\200\321\202\320\276\321\207\320\272\320\270", nullptr));
+        checkBox_2->setText(QCoreApplication::translate("SettingsForm", "\320\220\320\262\321\202\320\276\320\267\320\260\320\277\321\203\321\201\320\272", nullptr));
+        checkBox_3->setText(QCoreApplication::translate("SettingsForm", "\320\237\321\200\320\276\320\262\320\265\321\200\320\272\320\260 \320\276\320\261\320\275\320\276\320\262\320\273\320\265\320\275\320\270\320\271", nullptr));
     } // retranslateUi
 
 };

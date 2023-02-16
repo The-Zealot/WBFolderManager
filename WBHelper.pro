@@ -2,6 +2,12 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+VERSION = 1.0.6.0
+QMAKE_TARGET_COMPANY = The_Zealot
+QMAKE_TARGET_PRODUCT = WB Helper
+QMAKE_TARGET_DESCRIPTION = Wildberries directory  manager
+QMAKE_TARGET_COPYRIGHT = Yaroslav Solovev
+
 CONFIG += c++11
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -22,7 +28,8 @@ FORMS += \
     mainwindow.ui \
     settingsform.ui
 
-win32:RC_FILE = resource.rc
+RC_ICONS = app.ico
+#RC_FILE = resource.rc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -9,8 +9,8 @@ SettingsForm::SettingsForm(QWidget *parent) :
 
     this->setModal(true);
 
-    ui->checkBox->setEnabled(false);
     ui->checkBox_2->setEnabled(false);
+    ui->checkBox_3->setEnabled(false);
 
     QFile file("config.json");
     file.open(QIODevice::ReadOnly);
@@ -22,6 +22,7 @@ SettingsForm::SettingsForm(QWidget *parent) :
     ui->editDefectDirection->setText(jObject["defectDir"].toString());
     ui->editDiscrepancyDirection->setText(jObject["discrepancyDir"].toString());
     ui->editOverageDirection->setText(jObject["overageDir"].toString());
+    ui->checkBoxCopyMovePhoto->setChecked(jObject["copyMovePhoto"].toBool());
 
     switch (jObject["mkdirPolicy"].toInteger())
     {
@@ -54,6 +55,7 @@ SettingsForm::SettingsForm(QWidget *parent) :
         jObject["discrepancyDir"]   = ui->editDiscrepancyDirection->text();
         jObject["overageDir"]       = ui->editOverageDirection->text();
         jObject["mkdirPolicy"]      = policy;
+        jObject["copyMovePhoto"]    = ui->checkBoxCopyMovePhoto->isChecked();
 
         QJsonDocument json(jObject);
         QFile file("config.json");
