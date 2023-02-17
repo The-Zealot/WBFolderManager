@@ -12,23 +12,6 @@ MainWindow::MainWindow(QWidget *parent)
     buttonSettings->setGeometry(this->width() - BUTTON_SIZE, 0, BUTTON_SIZE, BUTTON_SIZE);
     buttonSettings->show();
 
-//    QPushButton* buttonUpdateStyle = new QPushButton(this);
-//    buttonUpdateStyle->setGeometry(this->width() - BUTTON_SIZE * 2, 0, BUTTON_SIZE, BUTTON_SIZE);
-
-//    buttonUpdateStyle->show();
-
-//    connect(buttonUpdateStyle, &QPushButton::clicked, [this](){
-//        QFile file("./wb_style.css");
-//        if (!file.open(QIODevice::ReadOnly))
-//        {
-//            qDebug() << "Style not load";
-//            return;
-//        }
-//        qDebug() << "Style loading...";
-//        this->setStyleSheet(file.readAll());
-//        file.close();
-//    });
-
     this->setFixedSize(this->size());
 
     s = nullptr;
@@ -40,12 +23,14 @@ MainWindow::MainWindow(QWidget *parent)
     if (config.open(QIODevice::ReadOnly))
     {
         QJsonObject jObject = QJsonDocument::fromJson(config.readAll()).object();
+
         startDir        = jObject["startDir"].toString();
         defectDir       = jObject["defectDir"].toString();
         discDir         = jObject["discrepancyDir"].toString();
         overDir         = jObject["overageDir"].toString();
         policy          = (MkdirPolicy)jObject["mkdirPolicy"].toInteger();
         copyMovePhoto   = jObject["copyMovePhoto"].toBool();
+
         config.close();
     }
     else
