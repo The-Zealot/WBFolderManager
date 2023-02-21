@@ -7,11 +7,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    int BUTTON_SIZE = 16;
-    QPushButton* buttonSettings = new QPushButton(this);
-    buttonSettings->setGeometry(this->width() - BUTTON_SIZE, 0, BUTTON_SIZE, BUTTON_SIZE);
-    buttonSettings->show();
-
     this->setFixedSize(this->size());
 
     s = nullptr;
@@ -49,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
         updateDataOut();
 
     });
-    connect(buttonSettings, &QPushButton::clicked, [this](){
+    connect(ui->buttonSettings, &QPushButton::clicked, [this](){
         if (s)
         {
             delete s;
@@ -93,10 +88,10 @@ void MainWindow::updateDataOut()
 
     qDebug() << temp << fileSize;
 
-    QString data = "Загруженные фотографии:\n";
+    QString data = "Отладочная информация\nЗагруженные фотографии:\n";
 
     for (auto & iter : photos)
-        data.append('\t' + iter + '\n');
+        data.append(iter + '\n');
 
     data.append("Количество загруженных фотографий: " + QVariant(photos.size()).toString() + '\n');
 
@@ -110,7 +105,7 @@ void MainWindow::updateDataOut()
         if (iter->isChecked())
             data.append(iter->text());
 
-    ui->labelDataOut->setText(data);
+    ui->textBrowserDataOut->setText(data);
 
     qDebug() << "updateDataOut() was called";
 }
@@ -256,5 +251,11 @@ void MainWindow::on_buttonSubmit_clicked()
 
     QMessageBox::information(this, "Успешный успех!", "Директория успешно создана. Файлы успешно скопированы. "
 "Путь к директории помещен в буфер обмена");
+}
+
+
+void MainWindow::on_buttonTimetable_clicked()
+{
+    QProcess::startDetached("WBSchedleManager.exe");
 }
 

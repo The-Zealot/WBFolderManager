@@ -14,6 +14,7 @@
 #include <QDragEnterEvent>
 #include <QList>
 #include <QMimeData>
+#include <QProcess>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -37,6 +38,8 @@ private slots:
     void on_buttonBrowse_clicked();
 
     void on_buttonSubmit_clicked();
+
+    void on_buttonTimetable_clicked();
 
 private:
     Ui::MainWindow *ui;
