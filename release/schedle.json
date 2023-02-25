@@ -1,9 +1,9 @@
 {
-    "Employee_1": "",
-    "Employee_2": "",
-    "color_1": "",
-    "color_2": "",
-    "lastPayday": "",
-    "salary": 10942288,
-    "startDate": "Mon Feb 20 2023"
+    "Employee_1": "Иван Фомич",
+    "Employee_2": "Иван Кузьмич",
+    "color_1": "#ffcc00",
+    "color_2": "#00b500",
+    "lastPayday": "Fri Feb 24 2023",
+    "salary": 1400,
+    "startDate": "Sat Feb 18 2023"
 }

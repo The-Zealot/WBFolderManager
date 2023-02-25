@@ -36,8 +36,8 @@ public:
     QVBoxLayout *verticalLayout_5;
     QGridLayout *gridLayout;
     QToolButton *buttonBrowse;
-    QListWidget *listWidget;
     QLineEdit *editPhotoPath;
+    QListWidget *listWidget;
     QVBoxLayout *verticalLayout;
     QLabel *label;
     QLineEdit *editName;
@@ -59,7 +59,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(499, 302);
+        MainWindow->resize(499, 304);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         gridLayout_2 = new QGridLayout(centralwidget);
@@ -75,28 +75,23 @@ public:
 
         gridLayout->addWidget(buttonBrowse, 0, 1, 1, 1);
 
-        listWidget = new QListWidget(centralwidget);
-        listWidget->setObjectName(QString::fromUtf8("listWidget"));
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(listWidget->sizePolicy().hasHeightForWidth());
-        listWidget->setSizePolicy(sizePolicy);
-
-        gridLayout->addWidget(listWidget, 1, 0, 1, 2);
-
         editPhotoPath = new QLineEdit(centralwidget);
         editPhotoPath->setObjectName(QString::fromUtf8("editPhotoPath"));
-        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(editPhotoPath->sizePolicy().hasHeightForWidth());
-        editPhotoPath->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(editPhotoPath->sizePolicy().hasHeightForWidth());
+        editPhotoPath->setSizePolicy(sizePolicy);
 
         gridLayout->addWidget(editPhotoPath, 0, 0, 1, 1);
 
 
         verticalLayout_5->addLayout(gridLayout);
+
+        listWidget = new QListWidget(centralwidget);
+        listWidget->setObjectName(QString::fromUtf8("listWidget"));
+
+        verticalLayout_5->addWidget(listWidget);
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
@@ -107,8 +102,8 @@ public:
 
         editName = new QLineEdit(centralwidget);
         editName->setObjectName(QString::fromUtf8("editName"));
-        sizePolicy1.setHeightForWidth(editName->sizePolicy().hasHeightForWidth());
-        editName->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(editName->sizePolicy().hasHeightForWidth());
+        editName->setSizePolicy(sizePolicy);
 
         verticalLayout->addWidget(editName);
 

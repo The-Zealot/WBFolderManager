@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->setFixedSize(this->size());
 
     s = nullptr;
-    fileSize = 0;
+    _fileSize = 0;
 
     ui->editName->setValidator(new QRegularExpressionValidator(QRegularExpression("[a-zA-Z0-9а-яА-Я][a-zA-Z0-9а-яА-Я ]{0,50}")));
 
@@ -19,12 +19,12 @@ MainWindow::MainWindow(QWidget *parent)
     {
         QJsonObject jObject = QJsonDocument::fromJson(config.readAll()).object();
 
-        startDir        = jObject["startDir"].toString();
-        defectDir       = jObject["defectDir"].toString();
-        discDir         = jObject["discrepancyDir"].toString();
-        overDir         = jObject["overageDir"].toString();
-        policy          = (MkdirPolicy)jObject["mkdirPolicy"].toInteger();
-        copyMovePhoto   = jObject["copyMovePhoto"].toBool();
+        _startDir        = jObject["startDir"].toString();
+        _defectDir       = jObject["defectDir"].toString();
+        _discDir         = jObject["discrepancyDir"].toString();
+        _overDir         = jObject["overageDir"].toString();
+        _policy          = (MkdirPolicy)jObject["mkdirPolicy"].toInteger();
+        _isCopyPhoto    = jObject["copyMovePhoto"].toBool();
 
         config.close();
     }
@@ -39,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->editName, &QLineEdit::textEdited, [this](){ updateDataOut(); });
 
     connect(ui->listWidget, &QListWidget::itemDoubleClicked, [this](){
-        photos.removeAt(ui->listWidget->currentRow());
+        _photos.removeAt(ui->listWidget->currentRow());
         fillListWidget();
         updateDataOut();
 
@@ -71,31 +71,31 @@ void MainWindow::updateDataOut()
 {
     QString postfixFileSize = " B";
 
-    if (fileSize >= (1024 * 1024))
+    if (_fileSize >= (1024 * 1024))
     {
-        fileSize /= (1024 * 1024);
+        _fileSize /= (1024 * 1024);
         postfixFileSize = " MB";
     }
-    if (fileSize >= 1024)
+    if (_fileSize >= 1024)
     {
-        fileSize /= 1024;
+        _fileSize /= 1024;
         postfixFileSize = " KB";
     }
 
-    int temp = fileSize * 100;
-    fileSize = temp;
-    fileSize /= 100;
+    int temp = _fileSize * 100;
+    _fileSize = temp;
+    _fileSize /= 100;
 
-    qDebug() << temp << fileSize;
+    qDebug() << temp << _fileSize;
 
     QString data = "Отладочная информация\nЗагруженные фотографии:\n";
 
-    for (auto & iter : photos)
+    for (auto & iter : _photos)
         data.append(iter + '\n');
 
-    data.append("Количество загруженных фотографий: " + QVariant(photos.size()).toString() + '\n');
+    data.append("Количество загруженных фотографий: " + QVariant(_photos.size()).toString() + '\n');
 
-    data.append("Размер загруженных фото: " + QVariant(fileSize).toString() + postfixFileSize + '\n');
+    data.append("Размер загруженных фото: " + QVariant(_fileSize).toString() + postfixFileSize + '\n');
 
     data.append("Имя новой директории: " + ui->editName->text() + '\n');
 
@@ -112,20 +112,17 @@ void MainWindow::updateDataOut()
 
 void MainWindow::fillListWidget()
 {
-    fileSize = 0;
+    _fileSize = 0;
 
     ui->listWidget->clear();
 
-    ui->listWidget->addItems(photos);
+    ui->listWidget->addItems(_photos);
 
-    for (auto & iter : photos)
+    for (auto & iter : _photos)
     {
         QFileInfo info(iter);
-        fileSize += info.size();
+        _fileSize += info.size();
     }
-
-//    if (fileSize > (1024))
-//        fileSize /= (1024);
 }
 
 bool MainWindow::eventFilter(QObject *object, QEvent *event)
@@ -143,7 +140,7 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
 
         for (auto iter : files)
         {
-            photos.append(iter.toLocalFile());
+            _photos.append(iter.toLocalFile());
         }
 
         if (files.isEmpty())
@@ -162,9 +159,9 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
 
 void MainWindow::on_buttonBrowse_clicked()
 {
-    photos = QFileDialog::getOpenFileNames(this, "Выбор фотокарточек", startDir, "*.png; *.jpg; *.jpeg");
+    _photos = QFileDialog::getOpenFileNames(this, "Выбор фотокарточек", _startDir, "*.png; *.jpg; *.jpeg");
 
-    qDebug() << photos;
+    qDebug() << _photos;
 
     fillListWidget();
 
@@ -189,16 +186,16 @@ void MainWindow::on_buttonSubmit_clicked()
     QString filePath;
 
     if (ui->radioButtonDefect->isChecked())
-        filePath = defectDir;
+        filePath = _defectDir;
     if (ui->radioButtonDiscrepancy->isChecked())
-        filePath = discDir;
+        filePath = _discDir;
     if (ui->radioButtonOverage->isChecked())
-        filePath = overDir;
+        filePath = _overDir;
 
     QDir dir(filePath + "/" + dirPrefix + " " + ui->editName->text());
 
 
-    switch(policy)
+    switch(_policy)
     {
     case MkdirPolicy::Ignore:
         break;
@@ -219,7 +216,7 @@ void MainWindow::on_buttonSubmit_clicked()
         break;
     }
 
-    for (auto & iter : photos)
+    for (auto & iter : _photos)
     {
         QFile file(iter);
         if (file.open(QIODevice::ReadOnly))
@@ -231,7 +228,7 @@ void MainWindow::on_buttonSubmit_clicked()
             }
 
             QString fileName = dir.path() + "/" + finfo.fileName();
-            if (copyMovePhoto)
+            if (_isCopyPhoto)
             {
                 file.copy(fileName);
             }
@@ -248,6 +245,8 @@ void MainWindow::on_buttonSubmit_clicked()
             QMessageBox::critical(this, "Упс, что-то случилось", "Ошибка чтения файла");
         }
     }
+
+
 
     QMessageBox::information(this, "Успешный успех!", "Директория успешно создана. Файлы успешно скопированы. "
 "Путь к директории помещен в буфер обмена");

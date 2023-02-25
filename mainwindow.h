@@ -12,6 +12,7 @@
 #include <QMessageBox>
 #include <QClipboard>
 #include <QDragEnterEvent>
+#include <QRegularExpressionValidator>
 #include <QList>
 #include <QMimeData>
 #include <QProcess>
@@ -44,14 +45,14 @@ private slots:
 private:
     Ui::MainWindow *ui;
     SettingsForm* s;
-    QString startDir;
-    QString defectDir;
-    QString discDir;
-    QString overDir;
-    QStringList photos;
-    MkdirPolicy policy;
-    bool copyMovePhoto;
+    QString _startDir;
+    QString _defectDir;
+    QString _discDir;
+    QString _overDir;
+    QStringList _photos;
+    MkdirPolicy _policy;
+    bool _isCopyPhoto;
 
-    double fileSize;
+    double _fileSize;
 };
 #endif // MAINWINDOW_H
