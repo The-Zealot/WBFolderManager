@@ -16,6 +16,7 @@
 #include <QList>
 #include <QMimeData>
 #include <QProcess>
+#include <QHostInfo>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -40,7 +41,7 @@ private slots:
 
     void on_buttonSubmit_clicked();
 
-    void on_buttonTimetable_clicked();
+    void on_buttonHostName_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -51,7 +52,7 @@ private:
     QString _overDir;
     QStringList _photos;
     MkdirPolicy _policy;
-    bool _isCopyPhoto;
+    bool _isCopyMode;
 
     double _fileSize;
 };

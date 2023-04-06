@@ -50,9 +50,9 @@ public:
     QVBoxLayout *verticalLayout_3;
     QLabel *label_2;
     QHBoxLayout *horizontalLayout_2;
-    QPushButton *buttonTimetable;
-    QPushButton *buttonSettings;
     QPushButton *buttonSubmit;
+    QPushButton *buttonSettings;
+    QPushButton *buttonHostName;
     QTextBrowser *textBrowserDataOut;
 
     void setupUi(QMainWindow *MainWindow)
@@ -147,20 +147,20 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        buttonTimetable = new QPushButton(centralwidget);
-        buttonTimetable->setObjectName(QString::fromUtf8("buttonTimetable"));
+        buttonSubmit = new QPushButton(centralwidget);
+        buttonSubmit->setObjectName(QString::fromUtf8("buttonSubmit"));
 
-        horizontalLayout_2->addWidget(buttonTimetable);
+        horizontalLayout_2->addWidget(buttonSubmit);
 
         buttonSettings = new QPushButton(centralwidget);
         buttonSettings->setObjectName(QString::fromUtf8("buttonSettings"));
 
         horizontalLayout_2->addWidget(buttonSettings);
 
-        buttonSubmit = new QPushButton(centralwidget);
-        buttonSubmit->setObjectName(QString::fromUtf8("buttonSubmit"));
+        buttonHostName = new QPushButton(centralwidget);
+        buttonHostName->setObjectName(QString::fromUtf8("buttonHostName"));
 
-        horizontalLayout_2->addWidget(buttonSubmit);
+        horizontalLayout_2->addWidget(buttonHostName);
 
 
         verticalLayout_3->addLayout(horizontalLayout_2);
@@ -197,9 +197,9 @@ public:
         radioButtonDiscrepancy->setText(QCoreApplication::translate("MainWindow", "\320\235\320\265\321\201\320\276\320\276\321\202\320\262\320\265\321\202\321\201\321\202\320\262\320\270\320\265", nullptr));
         radioButtonOverage->setText(QCoreApplication::translate("MainWindow", "\320\230\320\267\320\273\320\270\321\210\320\272\320\270", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "\320\235\320\260\320\262\320\270\320\263\320\260\321\206\320\270\321\217", nullptr));
-        buttonTimetable->setText(QCoreApplication::translate("MainWindow", "\320\223\321\200\320\260\321\204\320\270\320\272", nullptr));
-        buttonSettings->setText(QCoreApplication::translate("MainWindow", "\320\235\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270", nullptr));
         buttonSubmit->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\264\321\202\320\262\320\265\321\200\320\264\320\270\321\202\321\214", nullptr));
+        buttonSettings->setText(QCoreApplication::translate("MainWindow", "\320\235\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270", nullptr));
+        buttonHostName->setText(QCoreApplication::translate("MainWindow", "IP", nullptr));
     } // retranslateUi
 
 };

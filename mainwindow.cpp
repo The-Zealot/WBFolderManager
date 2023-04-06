@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
         _discDir         = jObject["discrepancyDir"].toString();
         _overDir         = jObject["overageDir"].toString();
         _policy          = (MkdirPolicy)jObject["mkdirPolicy"].toInteger();
-        _isCopyPhoto    = jObject["copyMovePhoto"].toBool();
+        _isCopyMode      = jObject["copyMovePhoto"].toBool();
 
         config.close();
     }
@@ -228,7 +228,7 @@ void MainWindow::on_buttonSubmit_clicked()
             }
 
             QString fileName = dir.path() + "/" + finfo.fileName();
-            if (_isCopyPhoto)
+            if (_isCopyMode)
             {
                 file.copy(fileName);
             }
@@ -244,6 +244,12 @@ void MainWindow::on_buttonSubmit_clicked()
         {
             QMessageBox::critical(this, "Упс, что-то случилось", "Ошибка чтения файла");
         }
+
+        if (!_isCopyMode)
+        {
+            _photos.clear();
+            updateDataOut();
+        }
     }
 
 
@@ -253,8 +259,15 @@ void MainWindow::on_buttonSubmit_clicked()
 }
 
 
-void MainWindow::on_buttonTimetable_clicked()
+void MainWindow::on_buttonHostName_clicked()
 {
-    QProcess::startDetached("WBSchedleManager.exe");
+    QString name    = QHostInfo::localHostName();
+    QString ip      = QHostInfo::fromName(name).addresses().last().toString();
+
+    QString text = QString( "Имя компьютера в сети:  %1\n"
+                            "IPv4 компьютера в сети:  %2\n")
+                            .arg(name)
+                            .arg(ip);
+    QMessageBox::information(this, "Данные сети компьютера", text);
 }
 

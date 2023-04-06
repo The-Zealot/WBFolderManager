@@ -116,9 +116,9 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
-             <widget class="QPushButton" name="buttonTimetable">
+             <widget class="QPushButton" name="buttonSubmit">
               <property name="text">
-               <string>График</string>
+               <string>Подтвердить</string>
               </property>
              </widget>
             </item>
@@ -130,9 +130,9 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="buttonSubmit">
+             <widget class="QPushButton" name="buttonHostName">
               <property name="text">
-               <string>Подтвердить</string>
+               <string>IP</string>
               </property>
              </widget>
             </item>
