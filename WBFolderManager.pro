@@ -2,10 +2,10 @@ QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-VERSION = 1.1.2.0
+VERSION = 1.1.3.0
 QMAKE_TARGET_COMPANY = The_Zealot
-QMAKE_TARGET_PRODUCT = WB Helper
-QMAKE_TARGET_DESCRIPTION = Wildberries directory manager
+QMAKE_TARGET_PRODUCT = WBFolderManager
+QMAKE_TARGET_DESCRIPTION = Managment a folders in the WBPoint
 QMAKE_TARGET_COPYRIGHT = Yaroslav Solovev
 
 CONFIG += c++11
