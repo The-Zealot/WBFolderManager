@@ -1,8 +1,0 @@
-{
-    "copyMovePhoto": true,
-    "defectDir": "D:/wildberries/брак",
-    "discrepancyDir": "D:/wildberries/несоответствия",
-    "mkdirPolicy": 1,
-    "overageDir": "D:/wildberries/ошибочные",
-    "startDir": "C:/Users/Sensei/Desktop"
-}
